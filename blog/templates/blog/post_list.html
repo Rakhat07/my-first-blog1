@@ -1,0 +1,21 @@
+
+
+        {% extends 'blog/base.html' %}
+        {% block content %}
+            {% for post in posts %}
+       <div class="card mb-3">
+       <h1 class="card-header">
+           <a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a>
+             <small><p>Опубликовано: {{ post.published_date }}</p></small>
+       </h1>
+       <div class="card-body">{{ post.text|linebreaks }}</div>
+           <div class = "comment_list" >
+           <a href="{% url 'post_detail' pk=post.pk %}">Comments: {{ post.approved_comments.count }}</a>
+           </div>
+        </div>
+
+            {% endfor %}
+        {% endblock %}
+
+
+

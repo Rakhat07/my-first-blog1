@@ -1,0 +1,46 @@
+{% load static %}
+{% load bootstrap4 %}
+<html>
+    <head>
+        {% bootstrap_css %}
+        {% bootstrap_javascript jquery='full' %}
+        <title>Главная</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+
+    </head>
+<body>
+    <aside>
+        <img src="{% static 'img/logo.png' %}" alt="Лого">
+         <span class="logo">TROIA</span>
+         <h3><a href="/">Главная</a></h3>
+        <ul>
+
+            {% if user.is_authenticated %}
+            <p>Здравствуйте, {{ user.username }} ! <small>(<a href="{% url 'logout' %}"> Покинуть </a>)</small></p>
+                <a href="{% url 'post_new' %}"><li><i class="far fa-plus-square"></i>Добавить пост</li></a>
+                <a href="{% url 'post_draft_list' %}"><li><i class="far fa-sticky-note"></i></i>Черновик</li></a>
+            {% else %}
+                <a href="{% url 'login' %}"><li><i class="fas fa-sign-in-alt"></i>Вход</li></a>
+                <a href="{% url 'users:register' %}"><li><i class="fas fa-sign-in-alt"></i>Регистрация</li></a>
+            {% endif %}
+
+        </ul>
+
+
+    </aside>
+
+    <div class="content container">
+        <div class="row">
+            <div class="col-md-8">
+            {% block content %}
+            {% endblock %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
